@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
+import {renderer, physics, app, appManager} from 'app';
 
 let updateIndex = 0;
 const physicsCube = new THREE.Mesh(new THREE.BoxBufferGeometry(1, 1, 1), new THREE.MeshPhongMaterial({
   color: 0xFF0000,
 }));
-scene.add(physicsCube);
+app.object.add(physicsCube);
 const physicsCubePhysicsId = physics.addBoxGeometry(new THREE.Vector3(0, 5, 0), new THREE.Quaternion(), new THREE.Vector3(0.5, 0.5, 0.5), true);
 
 renderer.setAnimationLoop((timestamp, frame) => {
@@ -16,4 +16,7 @@ renderer.setAnimationLoop((timestamp, frame) => {
   physicsCube.position.copy(position);
   physicsCube.quaternion.copy(quaternion);
   updateIndex++;
+});
+app.addEventListener('unload', () => {
+  physics.removeGeometry(physicsCubePhysicsId);
 });
