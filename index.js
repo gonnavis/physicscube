@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import metaversefile from 'metaversefile';
-const {useFrame} = metaversefile;
+const {useFrame, usePhysics} = metaversefile;
 
 export default () => {
+  const physics = usePhysics();
+  
   const physicsCube = new THREE.Mesh(new THREE.BoxBufferGeometry(1, 1, 1), new THREE.MeshPhongMaterial({
     color: 0xFF0000,
   }));
