@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-// import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 import metaversefile from 'metaversefile';
 const {useFrame} = metaversefile;
 
