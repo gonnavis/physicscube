@@ -11,9 +11,12 @@ export default () => {
   const physicsCubePhysicsId = physics.addBoxGeometry(new THREE.Vector3(0, 5, 0), new THREE.Quaternion(), new THREE.Vector3(0.5, 0.5, 0.5), true);
 
   let updateIndex = 0;
+  const p = new THREE.Vector3(0, 10, 0);
+  const q = new THREE.Quaternion(0, 0, 0, 1);
+  const s = new THREE.Vector3(1, 1, 1);
   useFrame(({timestamp}) => {
     if ((updateIndex % 100) === 0) {
-      physics.setPhysicsTransform(physicsCubePhysicsId, new THREE.Vector3(0, 10, 0), new THREE.Quaternion(0, 0, 0, 1));
+      physics.setPhysicsTransform(physicsCubePhysicsId, p, q, s);
     }
     const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
     physicsCube.position.copy(position);
