@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import metaversefile from 'metaversefile';
-const {useFrame, usePhysics} = metaversefile;
+const {useFrame, useCleanup, usePhysics} = metaversefile;
 
 export default () => {
   const physics = usePhysics();
@@ -22,6 +22,10 @@ export default () => {
     physicsCube.position.copy(position);
     physicsCube.quaternion.copy(quaternion);
     updateIndex++;
+  });
+  
+  useCleanup(() => {
+    physics.removeGeometry(physicsCubePhysicsId);
   });
   
   return physicsCube;
