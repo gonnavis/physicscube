@@ -8,7 +8,8 @@ export default () => {
   const physicsCube = new THREE.Mesh(new THREE.BoxBufferGeometry(1, 1, 1), new THREE.MeshPhongMaterial({
     color: 0xFF0000,
   }));
-  const physicsCubePhysicsId = physics.addBoxGeometry(new THREE.Vector3(0, 5, 0), new THREE.Quaternion(), new THREE.Vector3(0.5, 0.5, 0.5), true);
+  const physicsObject = physics.addBoxGeometry(new THREE.Vector3(0, 5, 0), new THREE.Quaternion(), new THREE.Vector3(0.5, 0.5, 0.5), true);
+  // window.physicsCube = physicsCube;
 
   let updateIndex = 0;
   const p = new THREE.Vector3(0, 10, 0);
@@ -16,16 +17,24 @@ export default () => {
   const s = new THREE.Vector3(1, 1, 1);
   useFrame(({timestamp}) => {
     if ((updateIndex % 100) === 0) {
-      physics.setPhysicsTransform(physicsCubePhysicsId, p, q, s);
+      // console.log('reset pos 1', physicsObject.position.toArray().join(','));
+      physicsObject.position.copy(p);
+      physicsObject.quaternion.copy(q);
+      // physicsObject.scale.copy(s);
+      physicsObject.needsUpdate = true;
+      // physics.setPhysicsTransform(physicsCubePhysicsId, p, q, s);
+      // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
     }
-    const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
-    physicsCube.position.copy(position);
-    physicsCube.quaternion.copy(quaternion);
+    // console.log('tick pos 1', physicsCube.position.toArray().join(','));
+    // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
+    physicsCube.position.copy(physicsObject.position);
+    physicsCube.quaternion.copy(physicsObject.quaternion);
     updateIndex++;
   });
   
   useCleanup(() => {
-    physics.removeGeometry(physicsCubePhysicsId);
+    // console.log('cleanup 1');
+    physics.removeGeometry(physicsObject);
   });
   
   return physicsCube;
