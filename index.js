@@ -111,9 +111,12 @@ export default () => {
     metalness: 0,
   });
   const physicsCube = new THREE.Mesh(geometry, material);
+  window.mesh = physicsCube;
   app.add(physicsCube);
+  window.appTest = app;
 
   const physicsObject = physics.addBoxGeometry(new THREE.Vector3(0, 0, 0), new THREE.Quaternion(), size.clone().multiplyScalar(0.5), true);
+  window.body = physicsObject;
   const {physicsMesh} = physicsObject;
   // window.physicsCube = physicsCube;
   // window.physicsMesh = physicsMesh;
