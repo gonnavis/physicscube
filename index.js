@@ -123,26 +123,30 @@ export default () => {
   const q = new THREE.Quaternion(0, 0, 0, 1);
   const s = new THREE.Vector3(1, 1, 1);
   useFrame(({timestamp}) => {
-    if ((updateIndex % 300) === 0) {
-      // console.log('reset pos 1', physicsObject.position.toArray().join(','));
-      physicsObject.position.copy(app.position).add(p);
-      physicsObject.quaternion.copy(app.quaternion).premultiply(q);
-      // physicsObject.physicsMesh.scale.copy(s);
-      physicsObject.updateMatrixWorld();
-      physicsObject.needsUpdate = true;
-      // physics.setPhysicsTransform(physicsCubePhysicsId, p, q, s);
-      // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
-    }
-    // console.log('tick pos 1', physicsCube.position.toArray().join(','));
-    // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
-    physicsObject.updateMatrixWorld();
-    localMatrix.copy(physicsObject.matrixWorld)
-      .premultiply(localMatrix2.copy(app.matrixWorld).invert())
-      .decompose(physicsCube.position, physicsCube.quaternion, physicsCube.scale);
-    // console.log('position', physicsObject.position.toArray().join(','), physicsCube.position.toArray().join(','));
-    app.updateMatrixWorld();
-    // physicsCube.updateMatrixWorld();
-    updateIndex++;
+    // if ((updateIndex % 300) === 0) {
+    //   // console.log('reset pos 1', physicsObject.position.toArray().join(','));
+    //   physicsObject.position.copy(app.position).add(p);
+    //   physicsObject.quaternion.copy(app.quaternion).premultiply(q);
+    //   // physicsObject.physicsMesh.scale.copy(s);
+    //   physicsObject.updateMatrixWorld();
+    //   physicsObject.needsUpdate = true;
+    //   // physics.setPhysicsTransform(physicsCubePhysicsId, p, q, s);
+    //   // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
+    // }
+    // // console.log('tick pos 1', physicsCube.position.toArray().join(','));
+    // // const {position, quaternion} = physics.getPhysicsTransform(physicsCubePhysicsId);
+    // physicsObject.updateMatrixWorld();
+    // localMatrix.copy(physicsObject.matrixWorld)
+    //   .premultiply(localMatrix2.copy(app.matrixWorld).invert())
+    //   .decompose(physicsCube.position, physicsCube.quaternion, physicsCube.scale);
+    // // console.log('position', physicsObject.position.toArray().join(','), physicsCube.position.toArray().join(','));
+    // app.updateMatrixWorld();
+    // // physicsCube.updateMatrixWorld();
+    // updateIndex++;
+
+    physicsCube.position.copy(physicsObject.position).sub(app.position);
+    physicsCube.quaternion.copy(physicsObject.quaternion);
+    physicsCube.updateMatrixWorld();
   });
   
   useCleanup(() => {
