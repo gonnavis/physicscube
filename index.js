@@ -156,3 +156,31 @@ export default () => {
   
   return app;
 };
+
+/* console_test
+  metaversefileApi.getPairByPhysicsId(1)
+
+  rootScene.traverse(child=>{
+    if(child.contentId?.includes('physicscube')) {
+  console.log(child)
+  window.physicscubeApp=child
+    }
+  })
+
+  physicscube.children[0].visible=false
+
+  metaversefileApi.getPairByPhysicsId(1)[1] === physicscube
+  false
+
+  metaversefileApi.getPairByPhysicsId(1)[1] === physicscube.physicsObjects[0]
+  true
+
+  physicscube.physicsObjects[0].physicsMesh === physicscube.children[0]
+  false
+
+  metaversefileApi.getPairByPhysicsId(1)[0] === physicscube
+  true
+
+  physicsManager.setVelocity(physicscubeApp.physicsObjects[0],new THREE.Vector3(0,15,0),true)
+  physicsManager.setAngularVelocity(physicscubeApp.physicsObjects[0],new THREE.Vector3(1,2,3),true)
+*/
