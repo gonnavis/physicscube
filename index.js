@@ -112,16 +112,18 @@ export default () => {
   });
   const physicsCube = new THREE.Mesh(geometry, material);
   app.add(physicsCube);
+  // debugger;
 
-  const physicsObject = physics.addBoxGeometry(new THREE.Vector3(0, 0, 0), new THREE.Quaternion(), size.clone().multiplyScalar(0.5), true);
-  const {physicsMesh} = physicsObject;
+  // const physicsObject = physics.addBoxGeometry(new THREE.Vector3(0, 2, -2), new THREE.Quaternion(), size.clone().multiplyScalar(0.5), true);
+  const physicsObject = physics.addBoxGeometry(app.position, app.quaternion, size.clone().multiplyScalar(0.5), true);
+  // const {physicsMesh} = physicsObject;
   // window.physicsCube = physicsCube;
   // window.physicsMesh = physicsMesh;
 
-  let updateIndex = 0;
-  const p = new THREE.Vector3(0, 10, 0);
-  const q = new THREE.Quaternion(0, 0, 0, 1);
-  const s = new THREE.Vector3(1, 1, 1);
+  // let updateIndex = 0;
+  // const p = new THREE.Vector3(0, 10, 0);
+  // const q = new THREE.Quaternion(0, 0, 0, 1);
+  // const s = new THREE.Vector3(1, 1, 1);
   useFrame(({timestamp}) => {
     // if ((updateIndex % 300) === 0) {
     //   // console.log('reset pos 1', physicsObject.position.toArray().join(','));
